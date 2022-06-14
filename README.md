@@ -8,6 +8,8 @@
 ## General info
 It's a React SPA application with just one view which use API endpoint to display the paginated list of products.
 
+### Live [demo](https://wiktorkoscielny.github.io/react-recruitment-task/)
+
 ## Setup
 
 1. Installed __react paginate__ `npm i react-paginate`
