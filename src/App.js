@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 // data
 import JsonData from "./MOCK_DATA.json";
@@ -13,6 +13,9 @@ function App() {
   const [datas, setDatas] = useState(JsonData);
   const [pageNumber, setPageNumber] = useState(0);
 
+   // search input value
+   const [query, setQuery] = useState('')
+
   const datasPerPage = 5;
   const pagesVisited = pageNumber * datasPerPage;
   const displayDatas = datas.slice(pagesVisited, pagesVisited + datasPerPage);
@@ -24,8 +27,18 @@ function App() {
   return (
     <div className="App">
 
-      {/* display data */}
-        {displayDatas.map((data) => {
+      {/* input field */}
+      <div className="container__input">
+        <input 
+          type='number' 
+          placeholder='Search...' 
+          className='search__input'
+          onChange={(e) => setQuery(e.target.value)}
+        ></input>
+      </div>
+
+      {/* display & filter data */}
+      {displayDatas.filter(data => data.id.toString().includes(query)).map((data) => { 
           const color = data.color
           return (
             <div className='data' key={data.id} >
@@ -36,7 +49,8 @@ function App() {
               </ul>
             </div>
           );
-        })}
+        })
+      }
 
       {/* paginate */}
       <ReactPaginate
@@ -52,7 +66,9 @@ function App() {
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />
+
     </div>
   );
 }
+
 export default App;
