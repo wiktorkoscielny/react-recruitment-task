@@ -6,7 +6,7 @@
 * [Available Scripts](#available-scripts)
 
 ## General info
-It's a React SPA application with just one view which use API endpoint to display the paginated list of products.
+It's a React SPA application which use API endpoint to display the paginated list of products.
 
 ### Live [demo](https://wiktorkoscielny.github.io/react-recruitment-task/)
 
