@@ -16,5 +16,6 @@ It's a React SPA application with just one view which use API endpoint to displa
 
 ## Available Scripts
 
+
 In the project directory, you can run `npm start` - runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
