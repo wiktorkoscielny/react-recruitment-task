@@ -6,15 +6,16 @@ import JsonData from "./MOCK_DATA.json";
 // react-paginate
 import ReactPaginate from "react-paginate";
 
-// styles 
+// styles
 import "./App.css";
 
 function App() {
   const [datas, setDatas] = useState(JsonData);
   const [pageNumber, setPageNumber] = useState(0);
-
-   // search input value
-   const [query, setQuery] = useState('')
+  const [isActive, setIsActive] = useState(false);
+  const [stateColor, setStateColor] = useState("#1f1f38");
+  // search input value
+  const [query, setQuery] = useState("");
 
   const datasPerPage = 5;
   const pagesVisited = pageNumber * datasPerPage;
@@ -23,39 +24,51 @@ function App() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+  const handleBoolean = () => {
+    setIsActive((current) => !current);
+  };
 
   return (
-    <div className="App">
-
+    <div className="App" style={{ backgroundColor: stateColor }}>
       {/* input field */}
       <div className="container__input">
-        <input 
-          type='number' 
-          placeholder='Search...' 
-          className='search__input'
+        <input
+          type="number"
+          placeholder="Search..."
+          className="search__input"
           onChange={(e) => setQuery(e.target.value)}
         ></input>
       </div>
 
       {/* display & filter data */}
-      {displayDatas.filter(data => data.id.toString().includes(query)).map((data) => { 
-          const color = data.color
+      {displayDatas
+        .filter((data) => data.id.toString().includes(query))
+        .map((data) => {
+          const color = data.color;
+
+          const handleColorChange = () => {
+            setStateColor(isActive ? "#1f1f38" : data.color);
+            // setStateColor(data.color)
+          };
           return (
-            <div className='data' key={data.id} >
-              <ul key={data.id} style={{backgroundColor: color}}>
+            <div className="data" key={data.id} onClick={handleColorChange}>
+              <ul
+                key={data.id}
+                style={{ backgroundColor: color }}
+                onClick={handleBoolean}
+              >
                 <li>{data.id}</li>
                 <li>{data.name}</li>
                 <li>{data.year}</li>
               </ul>
             </div>
           );
-        })
-      }
+        })}
 
       {/* paginate */}
       <ReactPaginate
-        previousLabel={'<'}
-        nextLabel={'>'}
+        previousLabel={"<"}
+        nextLabel={">"}
         pageCount={pageCount}
         showPageCount={false}
         nextRel={null}
@@ -66,7 +79,6 @@ function App() {
         disabledClassName={"paginationDisabled"}
         activeClassName={"paginationActive"}
       />
-
     </div>
   );
 }
